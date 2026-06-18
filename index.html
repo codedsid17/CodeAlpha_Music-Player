@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelGroove - Retro Vinyl Player</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div id="app-container">
+
+    <header id="navbar">
+      <div class="logo">PIXELGROOVE</div>
+
+      <div class="search-container">
+        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" placeholder="Search for songs, artists" autocomplete="off">
+      </div>
+
+      <div class="nav-right">
+        <button class="nav-btn" aria-label="Messages">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </button>
+        <button class="nav-btn" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+        <div class="avatar-container">
+          <img src="assets/avatar.png" alt="User Profile" class="user-avatar" id="user-avatar">
+        </div>
+      </div>
+    </header>
+
+    <div id="main-layout">
+
+      <aside id="sidebar">
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-tab="home" aria-label="Home">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+          </button>
+          <button class="nav-item" data-tab="favorites" aria-label="Favorites">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </button>
+          <button class="nav-item" data-tab="music-note" aria-label="Tracks">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"></path>
+              <circle cx="6" cy="18" r="3"></circle>
+              <circle cx="18" cy="16" r="3"></circle>
+            </svg>
+          </button>
+          <button class="nav-item" data-tab="disc" aria-label="Albums">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+          <button class="nav-item" data-tab="equalizer" aria-label="Equalizer">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+              <line x1="1" y1="14" x2="7" y2="14"></line>
+              <line x1="9" y1="8" x2="15" y2="8"></line>
+              <line x1="17" y1="16" x2="23" y2="16"></line>
+            </svg>
+          </button>
+          <button class="nav-item" data-tab="tags" aria-label="Genres">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 8c-.83 0-1.5-.67-1.5-1.5S4.67 5 5.5 5 7 5.67 7 6.5 6.33 8 5.5 8z"/>
+            </svg>
+          </button>
+        </nav>
+      </aside>
+
+      <main id="workspace">
+
+        <section id="player-panel">
+          <div class="turntable-deck">
+            <div class="screw top-left"></div>
+            <div class="screw top-right"></div>
+            <div class="screw bottom-left"></div>
+            <div class="screw bottom-right"></div>
+
+            <div class="turntable-platter-ring"></div>
+
+            <div class="vinyl-wrapper">
+              <div class="vinyl-record" id="vinyl-record">
+                <div class="vinyl-groove groove-1"></div>
+                <div class="vinyl-groove groove-2"></div>
+                <div class="vinyl-groove groove-3"></div>
+                <div class="vinyl-groove groove-4"></div>
+                <div class="vinyl-label">
+                  <div class="label-top"></div>
+                  <div class="label-bottom"></div>
+                  <span class="label-text">33⅓ RPM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tonearm-container">
+              <div class="tonearm-pivot">
+                <div class="pivot-cap"></div>
+              </div>
+              <svg class="tonearm" id="tonearm" viewBox="0 0 100 200">
+                <path d="M 50 20 Q 55 50 35 110 L 35 150 L 25 180" fill="none" stroke="#777" stroke-width="6" stroke-linecap="round"/>
+                <path d="M 50 20 Q 55 50 35 110 L 35 150 L 25 180" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round"/>
+                <rect x="17" y="172" width="16" height="22" rx="3" fill="#333" stroke="#222" stroke-width="1"/>
+                <rect x="21" y="177" width="8" height="12" rx="1" fill="#c0c0c0"/>
+                <circle cx="25" cy="183" r="2" fill="#d9534f"/>
+                <circle cx="50" cy="12" r="14" fill="#a0a0a0" stroke="#333" stroke-width="2"/>
+                <circle cx="50" cy="12" r="6" fill="#444"/>
+              </svg>
+            </div>
+
+            <div class="deck-controls">
+              <div class="pitch-fader-track">
+                <div class="pitch-fader-ticks">
+                  <span>-</span>
+                  <span>0</span>
+                  <span>+</span>
+                </div>
+                <div class="pitch-fader-handle" id="pitch-handle"></div>
+              </div>
+              <button class="deck-toggle-btn" id="deck-power" aria-label="Turntable Power">
+                <span class="indicator-dot"></span>
+                <span class="toggle-label">POWER</span>
+              </button>
+              <div class="metallic-strobe-btn">
+                <div class="inner-strobe-btn"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="song-info-container">
+            <div class="song-details">
+              <h1 class="song-title" id="current-title">The Suffering</h1>
+
+              <div class="likes-badge" id="likes-badge" role="button" tabindex="0" aria-label="Like song, current count 392">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                  <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-3 8h-3v3h-2v-3H9V8h3V5h2v3h3v2z"/>
+                </svg>
+                <span id="likes-count">392</span>
+              </div>
+            </div>
+
+            <span class="song-genre" id="current-genre">Classic</span>
+          </div>
+
+          <div class="progress-bar-wrapper">
+            <span class="time-display time-current" id="time-current">1:54</span>
+
+            <div class="waveform-container" id="waveform-scrub">
+            </div>
+
+            <span class="time-display time-total" id="time-total">3:35</span>
+          </div>
+
+          <div class="player-controls">
+            <button class="control-btn mini-btn" id="minimize-btn" aria-label="Toggle Deck Details">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 14 10 14 10 20"></polyline>
+                <polyline points="20 10 14 10 14 4"></polyline>
+                <line x1="14" y1="10" x2="21" y2="3"></line>
+                <line x1="10" y1="14" x2="3" y2="21"></line>
+              </svg>
+            </button>
+
+            <button class="control-btn prev-btn" id="prev-btn" aria-label="Previous Track">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+              </svg>
+            </button>
+
+            <button class="control-btn play-pause-btn" id="play-pause-btn" aria-label="Play">
+              <svg id="play-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="display:none;">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <svg id="pause-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+              </svg>
+            </button>
+
+            <button class="control-btn next-btn" id="next-btn" aria-label="Next Track">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M6 18l8.5-6L6 6zm9-12h2v12h-2z"/>
+              </svg>
+            </button>
+
+            <button class="control-btn shuffle-btn" id="shuffle-btn" aria-label="Shuffle Tracks">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 3 21 3 21 8"></polyline>
+                <line x1="4" y1="20" x2="21" y2="3"></line>
+                <polyline points="21 16 21 21 16 21"></polyline>
+                <line x1="15" y1="15" x2="21" y2="21"></line>
+                <line x1="4" y1="4" x2="9" y2="9"></line>
+              </svg>
+            </button>
+          </div>
+        </section>
+
+        <section id="discovery-panel">
+          <div class="section-group">
+            <div class="section-header">
+              <h2 class="pixel-heading">Music Categories</h2>
+              <a href="#" class="view-all-link" id="view-all-categories">View all</a>
+            </div>
+
+            <div class="categories-list" role="tablist">
+              <button class="category-pill active" role="tab" aria-selected="true" data-category="classic">Classic</button>
+              <button class="category-pill" role="tab" aria-selected="false" data-category="90s">90s</button>
+              <button class="category-pill" role="tab" aria-selected="false" data-category="new">New</button>
+              <button class="category-pill" role="tab" aria-selected="false" data-category="instrumental">Instrumental</button>
+              <button class="category-pill" role="tab" aria-selected="false" data-category="pop">Pop</button>
+              <button class="category-pill" role="tab" aria-selected="false" data-category="r&b">R&amp;B</button>
+              <button class="category-pill" role="tab" aria-selected="false" data-category="hip-hop">Hip-Hop</button>
+              <button class="category-pill" role="tab" aria-selected="false" data-category="modern">Modern pla...</button>
+            </div>
+          </div>
+
+          <div class="cards-scroller" id="songs-scroller">
+            <div class="song-card" data-song-id="2">
+              <div class="card-image-wrapper">
+                <img src="assets/daily_chaos.png" alt="Daily Chaos Album Cover" class="card-img">
+              </div>
+              <h3 class="card-title">Daily Chaos</h3>
+              <p class="card-artist">by Emily Bryan</p>
+            </div>
+
+            <div class="song-card" data-song-id="3">
+              <div class="card-image-wrapper">
+                <img src="assets/simple_things.png" alt="Simple Things Album Cover" class="card-img">
+              </div>
+              <h3 class="card-title">Simple Things</h3>
+              <p class="card-artist">by Ryan Poppin</p>
+            </div>
+
+            <div class="song-card" data-song-id="4">
+              <div class="card-image-wrapper">
+                <img src="assets/not_so_good.png" alt="Not so good Album Cover" class="card-img">
+              </div>
+              <h3 class="card-title">Not so go...</h3>
+              <p class="card-artist">by Bryan Thomas</p>
+            </div>
+
+            <div class="song-card" data-song-id="6">
+              <div class="card-image-wrapper">
+                <img src="assets/dojacat.jfif" alt="Say So Album Cover" class="card-img">
+              </div>
+              <h3 class="card-title">Say So</h3>
+              <p class="card-artist">by Doja Cat</p>
+            </div>
+
+            <div class="song-card" data-song-id="7">
+              <div class="card-image-wrapper">
+                <img src="assets/dojacat.jfif" alt="Woman Album Cover" class="card-img">
+              </div>
+              <h3 class="card-title">Woman</h3>
+              <p class="card-artist">by Doja Cat</p>
+            </div>
+
+            <div class="song-card" data-song-id="8">
+              <div class="card-image-wrapper">
+                <img src="assets/dojacat.jfif" alt="Need to Know Album Cover" class="card-img">
+              </div>
+              <h3 class="card-title">Need to Know</h3>
+              <p class="card-artist">by Doja Cat</p>
+            </div>
+
+            <div class="song-card" data-song-id="9">
+              <div class="card-image-wrapper">
+                <img src="assets/dojacat.jfif" alt="Kiss Me More Album Cover" class="card-img">
+              </div>
+              <h3 class="card-title">Kiss Me More</h3>
+              <p class="card-artist">by Doja Cat</p>
+            </div>
+
+            <div class="song-card" data-song-id="10">
+              <div class="card-image-wrapper">
+                <img src="assets/dojacat.jfif" alt="Streets Album Cover" class="card-img">
+              </div>
+              <h3 class="card-title">Streets</h3>
+              <p class="card-artist">by Doja Cat</p>
+            </div>
+
+            <div class="song-card" data-song-id="11">
+              <div class="card-image-wrapper">
+                <img src="assets/dojacat.jfif" alt="Paint The Town Red Album Cover" class="card-img">
+              </div>
+              <h3 class="card-title">Paint The Town Red</h3>
+              <p class="card-artist">by Doja Cat</p>
+            </div>
+
+            <div class="song-card" data-song-id="12">
+              <div class="card-image-wrapper">
+                <img src="assets/dojacat.jfif" alt="Get Into It (Yuh) Album Cover" class="card-img">
+              </div>
+              <h3 class="card-title">Get Into It (Yuh)</h3>
+              <p class="card-artist">by Doja Cat</p>
+            </div>
+
+            <div class="song-card" data-song-id="13">
+              <div class="card-image-wrapper">
+                <img src="assets/dojacat.jfif" alt="Juicy Album Cover" class="card-img">
+              </div>
+              <h3 class="card-title">Juicy</h3>
+              <p class="card-artist">by Doja Cat</p>
+            </div>
+          </div>
+
+          <p class="home-more-hint" id="home-more-hint" aria-live="polite"></p>
+
+          <section class="playlist-detail-view" id="playlist-detail-view" hidden>
+            <div class="playlist-detail-topbar">
+              <button class="playlist-back-btn" id="playlist-back-btn" aria-label="Back to playlists">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                <span>Back</span>
+              </button>
+            </div>
+
+            <header class="playlist-detail-header">
+              <div class="playlist-detail-cover-wrapper">
+                <img class="playlist-detail-cover" src="assets/playlist.jpg" id="playlist-detail-cover" alt="Playlist Cover">
+              </div>
+              <div class="playlist-detail-meta">
+                <p class="playlist-detail-eyebrow">PLAYLIST</p>
+                <h2 class="playlist-detail-title" id="playlist-detail-title"></h2>
+                <p class="playlist-detail-subtitle" id="playlist-detail-subtitle"></p>
+                <div class="playlist-detail-actions">
+                  <button class="playlist-action-btn primary" id="playlist-play-all-btn" aria-label="Play all songs in playlist">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <span>Play all</span>
+                  </button>
+                  <button class="playlist-action-btn" id="playlist-shuffle-btn" aria-label="Shuffle playlist">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="16 3 21 3 21 8"></polyline>
+                      <line x1="4" y1="20" x2="21" y2="3"></line>
+                      <polyline points="21 16 21 21 16 21"></polyline>
+                      <line x1="15" y1="15" x2="21" y2="21"></line>
+                      <line x1="4" y1="4" x2="9" y2="9"></line>
+                    </svg>
+                    <span>Shuffle</span>
+                  </button>
+                </div>
+              </div>
+            </header>
+
+            <ol class="playlist-song-list" id="playlist-song-list"></ol>
+          </section>
+
+          <div class="section-group playlist-section">
+            <div class="section-header">
+              <h2 class="pixel-heading">Favorite Playlists (5)</h2>
+            </div>
+
+            <div class="playlist-list">
+              <div class="playlist-row" data-playlist-id="pl-1">
+                <div class="playlist-left">
+                  <div class="playlist-thumb-wrapper">
+                    <img src="assets/playlist_eren.png" alt="Best of Eren Playlist Cover" class="playlist-thumb">
+                  </div>
+                  <div class="playlist-info">
+                    <h3 class="playlist-title">Best of Eren</h3>
+                    <p class="playlist-subtitle">32 songs in this list</p>
+                  </div>
+                </div>
+                <button class="playlist-play-btn" aria-label="Play Best of Eren Playlist">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="playlist-row" data-playlist-id="pl-2">
+                <div class="playlist-left">
+                  <div class="playlist-thumb-wrapper">
+                    <img src="assets/playlist_eren.png" alt="Best of Eren Playlist Cover" class="playlist-thumb">
+                  </div>
+                  <div class="playlist-info">
+                    <h3 class="playlist-title">Best of Eren</h3>
+                    <p class="playlist-subtitle">32 songs in this list</p>
+                  </div>
+                </div>
+                <button class="playlist-play-btn" aria-label="Play Best of Eren Playlist">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="playlist-row" data-playlist-id="pl-doja">
+                <div class="playlist-left">
+                  <div class="playlist-thumb-wrapper">
+                    <img src="assets/dojacat.jfif" alt="Best of Doja Cat Playlist Cover" class="playlist-thumb">
+                  </div>
+                  <div class="playlist-info">
+                    <h3 class="playlist-title">Best of Doja Cat</h3>
+                    <p class="playlist-subtitle">8 songs in this list</p>
+                  </div>
+                </div>
+                <button class="playlist-play-btn" aria-label="Play Best of Doja Cat Playlist">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
